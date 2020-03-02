@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html><div class="container">
+    <div class="jumbotron roku-jumbotron">
+        <h2 class="display-4">Unlimited movies, TV <br>shows, and more.</h1>
+        <div>
+        <div>
+        <h3>Please sign in</p>
+        <form @submit.prevent="login">
+            <div>
+                <div class="col-md-4 my-1">
+                    <input v-model="input.username" type="text" class="form-control" id="inlineFormInputName" placeholder="username" required>
+                </div>
+
+                <div class="col-md-4 my-1">
+                    <input v-model="input.password" type="password" class="form-control" id="inlineFormPassword" placeholder="password" required>
+                </div>
+
+                <div class="col-md-4 my-1">
+                    <input v-model="input.remember" id="form-checkbox" type="checkbox" name="checkbox" value"remember">
+                    <label for="form-checkbox">Remember me</laber>
+                </div>
+                </div>
+
+                <div class="col-auto my-1">
+                    <button type="submit" class="btn btn-primary">Sign in</button>
+                    <p>Forgot password? <a>Click here</a></p>
+                </div>
+            </div>
+        </form>
+        </div>            
+    </div>
+</div>
