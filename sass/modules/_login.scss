@@ -1,0 +1,76 @@
+.title-sign{
+        margin: 25px auto;
+        text-align:center;
+        color:$purple;
+        font-family:Arial, Helvetica, sans-serif;
+        font-weight: bolder;
+    }
+
+.login-content{
+    background-image: url(../images/backimage.png);
+    padding: 2%;
+    h3{
+        color:$white;
+        text-shadow: 3px 3px 3px $purple;
+        text-align: center;
+        padding-top: 5px;
+        font-size: 2em;
+    }
+    
+}
+
+form{
+    text-align: center;
+    .checkbox{
+        color:$white;
+    }
+}
+input{
+vertical-align:middle;}
+
+.btn{
+    background-color: $purple;
+    color: $white;
+    font-size: 0.8em;
+    padding: 5px 50px;
+}
+
+.notice{
+    margin-top: 30px;
+    color: $white;
+    p{
+        margin-top: 20px;
+        color:$purple-mid;
+    }
+}
+
+.click{
+    text-decoration:underline;
+}
+
+.user-message{
+    color: $purple;
+    text-align: center;
+}
+
+.user-area{
+    background-color: $white;
+    width: 60%;
+    margin: 0 auto;
+    padding: 3%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    p{
+        color: $purple;
+        font-family: Arial, Helvetica, sans-serif;
+        font-weight: bolder;
+        text-transform: uppercase;
+        
+    }
+}
+
+.user-info{
+    text-align:center; 
+    vertical-align:middle;
+}

@@ -1,0 +1,15 @@
+@import '_vars';
+@import 'modules/header';
+@import 'modules/footer';
+@import 'modules/kids';
+@import 'modules/login';
+@import 'modules/parent';
+@import 'modules/vertify';
+
+body{
+    background-color:#ffffff ;
+}
+
+.contain{
+    margin: 0;
+}
