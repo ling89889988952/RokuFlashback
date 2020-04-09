@@ -17,6 +17,7 @@
   "homepage": "https://github.com/ling89889988952/RokuFlashback#readme",
   "dependencies": {
     "autoprefixer": "^9.7.4",
+    "browser-sync": "^2.26.7",
     "cssnano": "^4.1.10",
     "gulp": "^4.0.2",
     "gulp-imagemin": "^7.1.0",

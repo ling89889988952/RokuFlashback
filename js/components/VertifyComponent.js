@@ -1,10 +1,10 @@
 export default {
     template: `
-        <div class="container">
+        <div class="vertifyPage text-center">
            <h3>Please type the password</h3> 
-           <form @submit.prevent="login">
-           <input v-model="input.password" type="password" class="form-control" id="inlineFormPassword" placeholder="password" required>
-           <button type="submit" class="btn btn-primary">Sign in</button>
+            <form @submit.prevent="login">
+                <input v-model="input.password" type="password" class="form-control" id="inlineFormPassword" placeholder="password" required>
+                 <button type="submit" class="btn btn-primary">Sign in</button>
            </form>
         </div>
      `,

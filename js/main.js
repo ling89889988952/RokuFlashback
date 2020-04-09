@@ -21,16 +21,11 @@ import KidsComponent from "./components/KidsComponent.js";
   const vm = new Vue({
 
     data: {
-      // authenticated: false,
+      authenticated:false,
+      administrator:false,
+      admin:false,
+      user:[]
 
-      mockAccount: {
-        username: "user",
-        password: "password"
-      },
-
-      user: [],
-
-      //currentUser: {},
     },
 
     created: function () {
@@ -43,20 +38,53 @@ import KidsComponent from "./components/KidsComponent.js";
     methods: {
       setAuthenticated(status, data) {
         this.authenticated = status;
-        // handle implicit type coercion(bad, bad part of js)
-        // turn our admin 1 or 0 back into a number
-        this.user = data;
       
       },
 
+      // back to login page, and all control button will be false
       logout() {
-        // delete local session
-
-        // push user back to login page
         this.$router.push({ path: "/login" });
         this.authenticated = false;
+        this.administrator =false;
+        this.admin = false;
+
+        if(localStorage.getItem("cachedUser")) {
+          localStorage.removeItem("cachedUser");
+        }
+        if(localStorage.getItem("catchVideo")){
+          localStorage.removeItem("catchVideo");
+        }
+
+      },
+
+      // In parent channel, go to childchannel, set the 
+      gochildchannel(){
+        this.$router.push({ path: "/kids" });
+        this.admin = true;
         this.administrator = false;
+      },
+
+      goparentchannel(){
+        this.$router.push({ path:"/parent" });
+        this.administrator = false;
+        this.admin = false;
       }
+
+    },
+
+    created:function(){
+      // check for a user in localstorage
+      // if we've logged in before, this should be here until we manuallly remove
+
+      if(localStorage.getItem("cachedUser")){
+        let user = JSON.parse(localStorage.getItem("cachedUser"));
+
+        this.authenticated = true;
+        this.$router.push({ name:'user'});
+      }else{
+        this.$router.push({ name:'login'});
+      }
+     
     },
 
     router: router

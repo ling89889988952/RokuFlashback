@@ -52,4 +52,23 @@ export default {
         </div>
     </div>
 </div>
-     `}
+     `,
+
+     methods: {
+        logout() {
+            // delete local session
+    
+            // push user back to login page
+            this.$router.push({ path: "/login" });
+            this.authenticated = false;
+          },
+    
+          back() {
+            this.$router.push({ path: "/users" });
+            this.authenticated = true;
+            this.administrator = true;
+            this.kids          = false;
+          }
+    
+     }
+ }
