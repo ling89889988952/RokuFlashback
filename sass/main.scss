@@ -19,3 +19,12 @@ body{
 .contain{
     margin: 0;
 }
+
+li{
+    list-style: none;
+}
+
+.control-icon{
+    color: $purple;
+    font-size: 1.5em;
+}

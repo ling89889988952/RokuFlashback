@@ -1,74 +1,70 @@
+import kidallComponent from './KidallComponent.js';
+import kidmovieComponent from './KidmovieComponent.js';
+import kidtvComponent    from './KidtvComponent.js';
+import kidaudioComponent from './KidaudioComponent.js';
+
 export default {
+    name:'KidComponent',
+    
     template: `
-    <div class="container">
-    <div class="row">
-        <div class="col-sm-3">
-            <a><img src="images/" alt=""></a>
-            <a><img src="images/" alt=""></a>
-            <a><img src="images/" alt=""></a>
+    <div class="kidPage">
+        <div class="container">
+            <div class="kid-grids-top text-center">
+                <div class="row">
+                    <div class="col-md-3 media-type kid-grid" v-for="media in mediaTypes" :data-type="media.description" @click="switchMedia(media.component)">
+                        <i v-bind:class="[media.iconClass]"></i>
+                        <h4>{{ media.description }}</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="kidPlay">
+                <component :is="this.activeComponent"></component>
+            </div>
+                  
+        </div>
+
+        <div class="kid-grids-bottom">
+                <div class="row">
+                    <div class="col-sm-4 col-md-2 text-center">
+                        <h5>Cooperation:</h5>
+                    </div>
+                    <div class="col-sm-8 col-md-10 text-center">
+                        <div class="row">
+                            <img  src="images/apl.png" alt="apl">
+                            <img  src="images/boom.png" alt="boom">
+                            <img  src="images/dise.png" alt="dise">
+                            <img  src="images/disjr.png " alt="disjr">
+                            <img  src="images/disxd.png" alt="disxd">
+                            <img  src="images/nickt.png" alt="nickt">
+                            
+                        </div>
+                    </div>
+                </div>
         </div>
     </div>
-    <div class="row">
-    <div class="col-sm-3">
-        <div>
-            <a><img src="images/film.png" alt="film icon"></a>
-            <p>Movies</p>
-        </div>
-        <div>
-            <a><img src="images/tv.png" alt="tv icon"></a>
-            <p>TV</p>
-        </div>
-        <div>
-            <a><img src="images/music.png" alt="music icon"></a>
-            <p>Music</p>
-        </div>
-</div>
-    </div>
-    <div class="row">
-        <div class="col-sm-3">
-            <p>Movies</p>
-            <p>TV</p>
-            <p>Music</p>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-3">
-            <a><img src="images/peterpan.jpeg" alt="peterpan"></a>
-            <a><img src="images/lady.jpeg" alt="lady"></a>
-            <a><img src="images/hercules.jpeg" alt="hercules"></a>      
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-9">
-            <p>Cooperation:</p>
-            <img src="images/apl.png" alt="apl">
-            <img src="images/boom.png" alt="boom">
-            <img src="images/dise.png" alt="dise">
-            <img src="images/disjr.png " alt="disjr">
-            <img src="images/disxd.png" alt="disxd">
-            <img src="images/nickt.png" alt="nickt">
-            <img src="images/nicklogo.png" alt="nickt">      
-                
-        </div>
-    </div>
-</div>
+
+
+        
+
      `,
 
-     methods: {
-        logout() {
-            // delete local session
-    
-            // push user back to login page
-            this.$router.push({ path: "/login" });
-            this.authenticated = false;
-          },
-    
-          back() {
-            this.$router.push({ path: "/users" });
-            this.authenticated = true;
-            this.administrator = true;
-            this.kids          = false;
-          }
-    
-     }
+     data:function(){
+        return {
+            activeComponent:kidallComponent,
+            mediaTypes:[
+                { iconClass: "fas fa-home", description: "All", component: kidallComponent },
+                { iconClass: "fas fa-film", description: "Movies", component: kidmovieComponent },
+                { iconClass: "fas fa-tv", description: "TV", component: kidtvComponent },
+                { iconClass: "fas fa-music", description: "Music", component: kidaudioComponent },
+            ]
+        }
+    },
+
+    methods: {
+        switchMedia(theComponent) {
+            this.activeComponent = theComponent;
+        }
+    }
+
  }

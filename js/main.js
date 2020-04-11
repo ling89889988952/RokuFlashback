@@ -3,7 +3,8 @@ import LoginComponent from "./components/LoginComponent.js"
 import UserComponent from "./components/UserComponent.js"
 import VertifyComponent from "./components/VertifyComponent.js"
 import ParentsComponent from "./components/ParentsComponent.js"
-import KidsComponent from "./components/KidsComponent.js";
+import KidsComponent from "./components/KidsComponent.js"
+
 
 (() => {
   let router = new VueRouter({
@@ -15,6 +16,7 @@ import KidsComponent from "./components/KidsComponent.js";
       { path: '/vertify', name: "vertify", component:VertifyComponent },
       { path: '/parent', name: "parent", component:ParentsComponent},
       { path: '/kids', name: "kids", component:KidsComponent},
+
     ]
   });
 
@@ -24,7 +26,8 @@ import KidsComponent from "./components/KidsComponent.js";
       authenticated:false,
       administrator:false,
       admin:false,
-      user:[]
+      vertifycode:'hello',
+      user:[],
 
     },
 
@@ -38,7 +41,12 @@ import KidsComponent from "./components/KidsComponent.js";
     methods: {
       setAuthenticated(status, data) {
         this.authenticated = status;
-      
+        this.user = data;
+        this.$router.push({ path: "/users" });      
+      },
+
+      setAdministrator(status) {
+        this.administrator= status;     
       },
 
       // back to login page, and all control button will be false
@@ -51,22 +59,25 @@ import KidsComponent from "./components/KidsComponent.js";
         if(localStorage.getItem("cachedUser")) {
           localStorage.removeItem("cachedUser");
         }
-        if(localStorage.getItem("catchVideo")){
-          localStorage.removeItem("catchVideo");
+
+        if(localStorage.getItem("cachedVideo")){
+          localStorage.removeItem("cachedVideo");
         }
 
       },
 
+      backtouser(){
+        this.$router.push({ path: "/users" });
+      },
+
       // In parent channel, go to childchannel, set the 
-      gochildchannel(){
+      gochildchannel(status){
+        this.administrator = status;
         this.$router.push({ path: "/kids" });
-        this.admin = true;
-        this.administrator = false;
       },
 
       goparentchannel(){
-        this.$router.push({ path:"/parent" });
-        this.administrator = false;
+        this.$router.push({ path:"/parent"});
         this.admin = false;
       }
 
@@ -77,10 +88,11 @@ import KidsComponent from "./components/KidsComponent.js";
       // if we've logged in before, this should be here until we manuallly remove
 
       if(localStorage.getItem("cachedUser")){
-        let user = JSON.parse(localStorage.getItem("cachedUser"));
-
+    
         this.authenticated = true;
-        this.$router.push({ name:'user'});
+        this.$router.push({ name:'users'});
+     
+
       }else{
         this.$router.push({ name:'login'});
       }

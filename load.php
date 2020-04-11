@@ -7,4 +7,5 @@ ini_set('display_errors', 1);
 session_start();
 require_once ABSPATH.'/config/connect.php';
 require_once ADMIN_SCRIPT_PATH.'/login.php';
+require_once ADMIN_SCRIPT_PATH.'/read.php';
 

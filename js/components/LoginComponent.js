@@ -11,16 +11,19 @@ export default {
                         <h3>sign in</h3>
                         <div class="my-1">
                             <input v-model="input.username" type="text" class="form-control" id="inlineFormInputName" placeholder="username" required>
-                         </div>
-                        <div class="my-1">
                             <input v-model="input.password" type="password" class="form-control" id="inlineFormPassword" placeholder="password" required>
                         </div>
+                        <div class="my-1 checkbox">
+                            <input id="form-checkbox" type="checkbox" name="checkbox" class="checkout-chose">
+                            <label for="form-checkbox" class="checkout-text">Remember me</label>
+                        </div>
+
                     </div>
 
                     <div class="notice text-center">
                         <button v-on:click.prevent="login()" type="submit" class="btn btn-primary">Sign in</button>
         
-                        <p>Forgot password? <a href="#">Click here</a></p>
+                        <p>Forgot password? <a class="click" href="#">Click here</a></p>
                     </div>
                 </form>
             </div>
@@ -59,7 +62,8 @@ export default {
                         console.warn(data);
                         alert("authentication failed, please try again");
                         } else {
-                        this.$emit("authenticated", true, data);
+                        this.$emit("authenticated", true);
+                        localStorage.setItem("cachedUser",JSON.stringify(this.username))
                         this.$router.replace({ name: "users" });
                         }
                     })
@@ -68,7 +72,7 @@ export default {
                     });
                 
             } else {
-                console.error("Please enter your username and password!");
+                console.log("Please enter your username and password!");
             }
         }
     }

@@ -7,11 +7,11 @@ export default {
 
         <div class="user-area text-center">
             <div class="row">
-                <div class="col-sm-6 float-right user">
+                <div class="col-md-6 float-right ">
                     <a @click="goPartent"><img src="images/couch-solid.png" alt="partens icon"></a>
                     <p>Users</p>
                 </div>
-                <div class="col-sm-6 float-left ">
+                <div class="col-md-6 float-left ">
                     <a @click="goKids"><img src="images/kid_icon.png" alt="partens icon"></a>
                     <p>Kids</p>
                 </div>
@@ -30,9 +30,19 @@ data(){
 },
 methods:{
     goPartent:function(){
-        this.$router.replace({name: "vertify"});
-    },
+        if(window.localStorage){
+            let role = localStorage.getItem("cachedUser");
+            if(role == 'parent'){
+            this.$router.replace({name: "parent"});
+            this.$emit("gochildchannel", true);
+            
+            } else{
+                this.$router.replace({name: "vertify"});
+            }
+    }
+},
     goKids:function(){
+        localStorage.setItem("cachedUser",'kids');
         this.$router.replace({name: "kids"});
     }
 }
