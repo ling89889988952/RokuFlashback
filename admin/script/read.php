@@ -92,7 +92,41 @@ function getDetail($args){
 
 function permission($id){
     $pdo = Database::getInstance()->getConnection();
+    $queryMovie = 'UPDATE tbl_media SET media_premission=:premission WHERE media_id= :id';
+    $movie_set =  $pdo->prepare($queryMovie);
+    $movie_result = $movie_set->execute(
+        array(
+            ':premission' => '0',
+            ':id' => $id,
+        )
+        );
 
+        if($movie_result){
+            $getMovie = 'SELECT * FROM tbl_media WHERE  media_id = :id';
+            $returnMovie = $pdo->prepare($getMovie);
+            $result = $returnMovie ->execute(
+                array(
+                    ':id' => $id,
+                )
+                ); 
+            
+
+            // $results = $pdo->query($returnMovie );
+            // var_dump($results );
+            // exit;
+            
+        if($result){
+            $results = $returnMovie->fetch(PDO::FETCH_ASSOC);
+            return $results;
+        }
+               
+        }else{
+            return'error';
+        }
+}
+
+function permission_kid($id){
+    $pdo = Database::getInstance()->getConnection();
     $queryMovie = 'UPDATE tbl_media SET media_premission=:premission WHERE media_id= :id';
     $movie_set =  $pdo->prepare($queryMovie);
     $movie_result = $movie_set->execute(
@@ -102,10 +136,22 @@ function permission($id){
         )
         );
 
-
         if($movie_result){
-            return 'cool';
+            $getMovie = 'SELECT * FROM tbl_media WHERE  media_id = :id';
+            $returnMovie = $pdo->prepare($getMovie);
+            $result = $returnMovie ->execute(
+                array(
+                    ':id' => $id,
+                )
+                ); 
+            
+        if($result){
+            $results = $returnMovie->fetch(PDO::FETCH_ASSOC);
+            return $results;
+        }
+               
         }else{
             return'error';
         }
+
 }
