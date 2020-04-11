@@ -11,8 +11,8 @@ export default {
             <p class="media-details">Release Year: {{ currentMediaDetails.media_release }}</p>
             <div class="row premission">
             <p>Set Premission:</p>
-            <span v-if="premissionall" @click="setpremission()"><i class="fas fa-eye"></i></span>
-            <span v-if="premissionadult" @click="setpremission()"><i class="fas fa-eye-slash"></i></span>
+            <span v-if="premissionall" @click="closepremission(id)"><i class="fas fa-eye"></i></span>
+            <span v-if="premissionadult" @click="openpremission(id)"><i class="fas fa-eye-slash"></i></span>
 
             </div>
             <h4 class="comment">Comment</h4>
@@ -55,17 +55,19 @@ export default {
 
     data: function () {
         return {
+            id:'',
             permission:'',
             currentMediaDetails: {},
             allRetrievedVideos: [],
-            premissionall:true,
-            premissionadult:false,
+            premissionall:'',
+            premissionadult:'',
+            
         }
     },
 
     created: function(){
         this.retrieveVideoContent();
-        this.premissionreslut();
+        // this.premissionreslut();
     },
     
 
@@ -98,28 +100,24 @@ export default {
                 localStorage.setItem("cachedVideo", JSON.stringify(data));
                 this.allRetrievedVideos = data;
                 this.currentMediaDetails = data[0];
+                this.id = this.currentMediaDetails.media_premmison;
+
+                let currentpremission = data[0].media_premission;
+                if(currentpremission == '0'){
+                    this.premissionadult = true;
+                }else{
+                    this.premissionall = true;
+                }
             })
 
-
-        
         },
 
-        // add the change premissional function and change the button
-        // when all finish , need to copy to other component
-        premissionreslut(){
-            if(this.premissionall = true){
-                this.premissionall = false;
-                this.premissionadult = true;
-            }else{
-                this.premissionall = true;
-                this.premissionadult = false;
-            }
-        },
 
         loadNewMovie(movie) {
             this.currentMediaDetails = movie;
             this.permission = movie.media_premission;
-
+            this.id = movie.media_id;
+    
             if(this.permission == '0'){
                 this.premissionall = false;
                 this.premissionadult = true;
@@ -130,13 +128,44 @@ export default {
             
         },
 
-        setpremission(movie){
-            this.currentMediaDetails = movie;
+        closepremission(id){
+            this.id = id;
+            let url = `./admin/admin_kid_premmion.php?media_id=id`;
+            
 
-        }
-    },
+            fetch(url)
+            .then(res => res.json())
+            .then(data =>{
+                let changeMediaDetails =  data;
+                let media_premmison = changeMediaDetails.media_premmison;
+                if(media_premmison == '0'){
+                    this.premissionadult = true;
+                    this.premissionall = false;
+                }
+            })
+
+        },
+
+        openpremission(id){
+            this.id = id;
+            let url = `./admin/admin_premission.php?media_id=id`;
+
+            fetch(url)
+            .then(res => res.json())
+            .then(data =>{
+                let changeMediaDetails =  data;
+                let media_premmison = changeMediaDetails.media_premmison;
+                if(media_premmison == '1'){
+                    this.premissionadult = false;
+                    this.premissionall = true;
+                }
+            })
+
+        },
+
+        },
+    }
     
 
 
 
-}
