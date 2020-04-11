@@ -3,7 +3,8 @@ import LoginComponent from "./components/LoginComponent.js"
 import UserComponent from "./components/UserComponent.js"
 import VertifyComponent from "./components/VertifyComponent.js"
 import ParentsComponent from "./components/ParentsComponent.js"
-import KidsComponent from "./components/KidsComponent.js";
+import KidsComponent from "./components/KidsComponent.js"
+
 
 (() => {
   let router = new VueRouter({
@@ -15,22 +16,19 @@ import KidsComponent from "./components/KidsComponent.js";
       { path: '/vertify', name: "vertify", component:VertifyComponent },
       { path: '/parent', name: "parent", component:ParentsComponent},
       { path: '/kids', name: "kids", component:KidsComponent},
+
     ]
   });
 
   const vm = new Vue({
 
     data: {
-      // authenticated: false,
+      authenticated:false,
+      administrator:false,
+      admin:false,
+      vertifycode:'hello',
+      user:[],
 
-      mockAccount: {
-        username: "user",
-        password: "password"
-      },
-
-      user: [],
-
-      //currentUser: {},
     },
 
     created: function () {
@@ -43,20 +41,62 @@ import KidsComponent from "./components/KidsComponent.js";
     methods: {
       setAuthenticated(status, data) {
         this.authenticated = status;
-        // handle implicit type coercion(bad, bad part of js)
-        // turn our admin 1 or 0 back into a number
         this.user = data;
-      
+        this.$router.push({ path: "/users" });      
       },
 
-      logout() {
-        // delete local session
+      setAdministrator(status) {
+        this.administrator= status;     
+      },
 
-        // push user back to login page
+      // back to login page, and all control button will be false
+      logout() {
         this.$router.push({ path: "/login" });
         this.authenticated = false;
-        this.administrator = false;
+        this.administrator =false;
+        this.admin = false;
+
+        if(localStorage.getItem("cachedUser")) {
+          localStorage.removeItem("cachedUser");
+        }
+
+        if(localStorage.getItem("cachedVideo")){
+          localStorage.removeItem("cachedVideo");
+        }
+
+      },
+
+      backtouser(){
+        this.$router.push({ path: "/users" });
+      },
+
+      // In parent channel, go to childchannel, set the 
+      gochildchannel(status){
+        this.administrator = status;
+        this.$router.push({ path: "/kids" });
+      },
+
+      goparentchannel(){
+        this.$router.push({ path:"/parent"});
+        this.admin = false;
       }
+
+    },
+
+    created:function(){
+      // check for a user in localstorage
+      // if we've logged in before, this should be here until we manuallly remove
+
+      if(localStorage.getItem("cachedUser")){
+    
+        this.authenticated = true;
+        this.$router.push({ name:'users'});
+     
+
+      }else{
+        this.$router.push({ name:'login'});
+      }
+     
     },
 
     router: router
