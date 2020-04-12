@@ -1,5 +1,5 @@
 export default {
-    name: "AllMediaComponent",
+    name: "KidaudioComponent",
 
     template: `
     <div>
@@ -63,13 +63,13 @@ export default {
                 this.currentMediaDetails = data[0];
             })
 
-        }
         },
 
         loadNewMovie(movie) {
             this.currentMediaDetails = movie;
             
         },
-    }
+    },
+}
 
 

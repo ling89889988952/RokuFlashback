@@ -70,7 +70,6 @@ export default {
         // this.premissionreslut();
     },
     
-
     methods: {
         filterMedia(filter) {
             let url = `./admin/admin_genre_media.php?filter=${filter}`;
@@ -92,6 +91,8 @@ export default {
             //     this.currentMediaDetails = this.allRetrievedVideos[0];
             // }else{
 
+
+
             let url = `./admin/admin_media.php?media=media`;
 
             fetch(url)
@@ -100,9 +101,9 @@ export default {
                 localStorage.setItem("cachedVideo", JSON.stringify(data));
                 this.allRetrievedVideos = data;
                 this.currentMediaDetails = data[0];
-                this.id = this.currentMediaDetails.media_premmison;
-
+                this.id = this.currentMediaDetails.media_id;
                 let currentpremission = data[0].media_premission;
+                
                 if(currentpremission == '0'){
                     this.premissionadult = true;
                 }else{
@@ -132,7 +133,6 @@ export default {
             this.id = id;
             let url = `./admin/admin_kid_premmion.php?media_id=id`;
             
-
             fetch(url)
             .then(res => res.json())
             .then(data =>{

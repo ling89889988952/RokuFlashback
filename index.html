@@ -27,9 +27,9 @@
                 <nav class="my-2 my-md-0 mr-md-3">
                     <div class="row">
                       <li v-if="authenticated" v-on:click="backtouser()" class="p-2 control-icon"><i class="fas fa-users"></i></li>
-                      <li v-if="administrator" @gochild="gochildchannel()"  class="p-2 control-icon"><i class="fas fa-child"></i></li>
+                      <li v-if="administrator" v-on:click="gochildchannel()"  class="p-2 control-icon"><i class="fas fa-child"></i></li>
                       <!-- <li v-if="administrator" v-on:click="limittochild()"><i class="fas fa-eye"></i></li> -->
-                      <li v-if="admin" v-on:click="goparentchannel()" class="p-2 control-icon"><i class="fas fa-user"></i></li>
+                      <li v-if="administrator" v-on:click="goparentchannel()" class="p-2 control-icon"><i class="fas fa-user"></i></li>
                       <li v-if="authenticated" v-on:click="logout()" class="p-2"><button class="btn btn-primary">Sign Out</button></li>
 
                     </div>

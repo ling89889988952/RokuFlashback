@@ -25,7 +25,6 @@ import KidsComponent from "./components/KidsComponent.js"
     data: {
       authenticated:false,
       administrator:false,
-      admin:false,
       vertifycode:'hello',
       user:[],
 
@@ -45,9 +44,9 @@ import KidsComponent from "./components/KidsComponent.js"
         this.$router.push({ path: "/users" });      
       },
 
-      setAdministrator(status) {
-        this.administrator= status;     
-      },
+      // setAdministrator(status) {
+      //   this.administrator= status;     
+      // },
 
       // back to login page, and all control button will be false
       logout() {
@@ -71,14 +70,12 @@ import KidsComponent from "./components/KidsComponent.js"
       },
 
       // In parent channel, go to childchannel, set the 
-      gochildchannel(status){
-        this.administrator = status;
+      gochildchannel(){
         this.$router.push({ path: "/kids" });
       },
 
       goparentchannel(){
         this.$router.push({ path:"/parent"});
-        this.admin = false;
       }
 
     },
@@ -88,10 +85,12 @@ import KidsComponent from "./components/KidsComponent.js"
       // if we've logged in before, this should be here until we manuallly remove
 
       if(localStorage.getItem("cachedUser")){
-    
-        this.authenticated = true;
         this.$router.push({ name:'users'});
-     
+        let role = localStorage.getItem("cachedUser");
+            if(role == 'parent'){
+              this.authenticated = true;
+              this.administrator = true;
+            }
 
       }else{
         this.$router.push({ name:'login'});
@@ -103,14 +102,14 @@ import KidsComponent from "./components/KidsComponent.js"
   }).$mount("#app");
 
   // add some route security here
-  router.beforeEach((to, from, next) => {
-    console.log('route guard fired');
-    // if the Vue suthenticated propert is set to false, then
-    // push the user back to the login screen (cuz they're not logged in)
-    if(vm.authenticated == false){
-      next("/login");
-    }else{
-      next();
-    }
-  })
+  // router.beforeEach((to, from, next) => {
+  //   console.log('route guard fired');
+  //   // if the Vue suthenticated propert is set to false, then
+  //   // push the user back to the login screen (cuz they're not logged in)
+  //   if(vm.authenticated == false){
+  //     next("/login");
+  //   }else{
+  //     next();
+  //   }
+  // })
 })();
