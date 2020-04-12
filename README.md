@@ -2,8 +2,18 @@
 
 This project is a video app based on Roku. 
 
+## username & password & vertify code
+(make sure upload the database to localhost)
+username: admin
+password: 123456
+vertify code: hello
+
 ## Prerequisites
 This project use the Vue.js to create the front-end framework and using LAMP stack (Linux, Apache, MySql and PHP) for the server side, also using the gulp to do that.
+
+- Make sure upload the database file(in database folder) to    
+  your localhost 
+
 
 - Insatll SASS(scss) 
     - Macs have it installed by default.
