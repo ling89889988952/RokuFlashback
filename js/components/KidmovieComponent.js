@@ -63,7 +63,6 @@ export default {
                 this.currentMediaDetails = data[0];
             })
 
-        }
         },
 
         loadNewMovie(movie) {
@@ -71,3 +70,4 @@ export default {
             
         },
     }
+}

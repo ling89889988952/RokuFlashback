@@ -27,7 +27,6 @@ export default {
             if(this.input.code != ""){
               if(this.input.code == this.$parent.vertifycode){
                 localStorage.setItem("cachedUser",'parent');
-                this.$emit("gochild",true);
                 this.$router.push({ name: "parent"});
             } else {
                 console.error("The code is wrong!");

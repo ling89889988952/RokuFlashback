@@ -1,5 +1,5 @@
 export default {
-    name: "AllMediaComponent",
+    name: "AllKidMediaComponent",
 
     template: `
     <div>
@@ -24,7 +24,6 @@ export default {
         </div>
 
         <div class="mediaContainer row">
-        
             <div class="thumb-wrapper clearfix">
                 <img  v-for="item in allRetrievedVideos" :src=" 'images/' + item.media_cover " alt="media thumb" @click="loadNewMovie(item)" class="img-thumbnail rounded  media-thumb col-12 col-sm-4 col-md-3">
             </div>
@@ -58,18 +57,18 @@ export default {
             fetch(url)
             .then(res => res.json())
             .then(data =>{
-                localStorage.setItem("cachedVideo", JSON.stringify(data));
+                // localStorage.setItem("cachedVideo", JSON.stringify(data));
                 this.allRetrievedVideos = data;
                 this.currentMediaDetails = data[0];
             })
 
-        }
         },
 
         loadNewMovie(movie) {
             this.currentMediaDetails = movie;
             
         },
-    }
+    },
+}
 
 

@@ -34,7 +34,7 @@ methods:{
             let role = localStorage.getItem("cachedUser");
             if(role == 'parent'){
             this.$router.replace({name: "parent"});
-            this.$emit("gochildchannel", true);
+            // this.$emit("gochildchannel", true);
             
             } else{
                 this.$router.replace({name: "vertify"});
@@ -42,7 +42,7 @@ methods:{
     }
 },
     goKids:function(){
-        localStorage.setItem("cachedUser",'kids');
+        // localStorage.setItem("cachedUser",'kids');
         this.$router.replace({name: "kids"});
     }
 }
