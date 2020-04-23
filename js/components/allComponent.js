@@ -11,8 +11,8 @@ export default {
             <p class="media-details">Release Year: {{ currentMediaDetails.media_release }}</p>
             <div class="row premission">
             <p>Set Premission:</p>
-            <span v-if="premissionall" @click="closepremission(id)"><i class="fas fa-eye"></i></span>
-            <span v-if="premissionadult" @click="openpremission(id)"><i class="fas fa-eye-slash"></i></span>
+            <span v-if="premissionall" @click="closepremission(currentMediaDetails.media_id)"><i class="fas fa-eye"></i></span>
+            <span v-if="premissionadult" @click="openpremission(currentMediaDetails.media_id)"><i class="fas fa-eye-slash"></i></span>
 
             </div>
             <h4 class="comment">Comment</h4>
@@ -130,7 +130,7 @@ export default {
         },
 
         closepremission(id){
-            this.id = id;
+        
             let url = `./admin/admin_kid_premmion.php?media_id=id`;
             
             fetch(url)
